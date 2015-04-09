@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Flash Cards</title>
+        <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <script src="js/lib/angular.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/controllers/MainController.js"></script>
+        <script src="js/controllers/StatsController.js"></script>
+        <script src="js/factories/FlashCardsFactory.js"></script>
+        <script src="js/factories/ScoreFactory.js"></script>
+        <script src="js/filters/cheat-filter.js"></script>
+        <script src="js/directives/loader/loader.js"></script>
+        <script src="js/directives/flash-card/flash-card.js"></script>
+        <script src="js/directives/border-on-hover/border-on-hover.js"></script>
+    </head>
+
+    <body ng-app="FlashCards">
+
+        <div ng-include="'templates/stats.html'">
+        </div>
+
+        <div ng-controller="MainController">
+
+            <!--<pre style="text-align: left;">{{ card | json }}</pre>-->
+
+            <form name="cardForm" ng-submit="cardForm.$valid && submitCard(card)" novalidate>
+                <span class="error" ng-show="cardForm.question.$invalid && cardForm.$submitted">Question is not valid.</span>
+                Question: <input name="question" ng-minlength="10" required type="text" ng-model="card.question" /><br />
+                Category:
+                <select required ng-model="card.category">
+                    <option>MongoDB</option>
+                    <option>Express</option>
+                    <option>Angular</option>
+                    <option>Node</option>
+                </select><br />
+                <input required type="text" ng-model="card.answers[0].text" />
+                <input type="checkbox" ng-model="card.answers[0].correct" />
+                <input required type="text" ng-model="card.answers[1].text" />
+                <input type="checkbox" ng-model="card.answers[1].correct" />
+                <input required type="text" ng-model="card.answers[2].text" />
+                <input type="checkbox" ng-model="card.answers[2].correct" />
+                <br /><button>Submit Card</button>
+            </form>
+
+            <button ng-click="getCategoryCards()" ng-class="{ active: chosenCategory === 'All' }">All Categories</button>
+
+            <button
+                    ng-repeat="category in categories"
+                    ng-click="getCategoryCards(category)"
+                    ng-class="{ active: chosenCategory === category }">
+                {{ category }}
+            </button>
+
+            <loader ng-show="loading"></loader>
+
+            <flash-card card="flashCard" ng-repeat="flashCard in flashCards | orderBy:'question'" ng-hide="loading || error"></flash-card>
+
+            <div ng-show="error">
+                <h2>FAILED TO GET CARDS… try again perhaps?</h2>
+                <pre>http status code: {{error.status}}</pre>
+            </div>
+
+        </div>
+
+    </body>
+
+</html>
