@@ -10,13 +10,11 @@ var indexHtmlPath = path.join(__dirname, '../index.html');
 var FlashCardModel = require('./models/flash-card-model');
 
 app.use(express.static(publicPath));
+app.use(express.static(path.join(__dirname, '../bower_components')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', function (req, res) {
-    res.sendFile(indexHtmlPath);
-});
 
 
 app.get('/cards', function (req, res) {
@@ -29,6 +27,10 @@ app.get('/cards', function (req, res) {
         }, Math.random() * 1000);
     });
 
+});
+
+app.get('/*', function (req, res) {
+    res.sendFile(indexHtmlPath);
 });
 
 app.post('/cards', function (req, res, next) {
