@@ -23,28 +23,38 @@
 
         <div ng-controller="MainController">
 
-
-        <li><a ui-sref='home'>home</a></li>
-        <li><a ui-sref='addcard'>Add Card</a></li>
+        <div id='cssmenu'>
+            <ul>
+                <li><a ui-sref='home'>home</a></li>
+            </ul>
+        </div>
+        
 
         <div ng-include="'templates/stats.html'">
         </div>
-        <ui-view></ui-view>
             <!--<pre style="text-align: left;">{{ card | json }}</pre>-->
 
            
 
             <button ng-click="getCategoryCards()" ng-class="{ active: chosenCategory === 'All' }">All Categories</button>
 
+            <button ui-sref='addcard'>Add Card</button>
+
+
             <button
-                ui-sref="frog({category: category})"
+                ui-sref="home.category({category: category})"
                     ng-repeat="category in categories"
                     ng-click="getCategoryCards(category)"
                     ng-class="{ active: chosenCategory === category }">
                 {{ category }}
             </button>
 
-            <loader ng-show="loading"></loader>
+            <loader ng-show="loading">
+
+            </loader>
+            
+
+            <ui-view></ui-view>
 
             <!-- hide original flashcards
             <flash-card card="flashCard" ng-repeat="flashCard in flashCards | orderBy:'question'" ng-hide="loading || error"></flash-card>

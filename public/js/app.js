@@ -5,7 +5,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 	$stateProvider
 		.state('home', {
 			url: '/home',
-			template: '<h1>Hello</h1>'
+			template: '<ui-view></ui-view>'
 		})
         .state('addcard', {
 			url: '/addcard',
@@ -17,7 +17,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 //		})
 
 
-        .state('frog', {
+        .state('home.category', {
             url: '/:category',
 			templateUrl: 'templates/loadedcard.html'
 		})

@@ -13,17 +13,26 @@ form {
   color: red;
 }
 
+.nav-bar {
+
+}
+
+@import url(http://fonts.googleapis.com/css?family=Capriola);
+
 button {
   border: 1px solid black;
   background: none;
   padding: 20px;
   margin-right: 15px;
   cursor: pointer;
-  outline: none; }
+  outline: none; 
+ 
+}
   button.active {
     background: gainsboro; }
 
 .flash-card {
+
   position: relative;
   width: 60%;
   height: 400px;
@@ -93,4 +102,6 @@ button {
       #statistics #scoreboard h3:last-child {
         margin-right: 0; }
       #statistics #scoreboard h3 span {
-        font-weight: bold; }
+        font-weight: bold; 
+
+      }
