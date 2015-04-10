@@ -1,0 +1,21 @@
+<p>HELLO TEMPLATE LOADED</p>
+            <form name="cardForm" ng-submit="cardForm.$valid && submitCard(card)" novalidate>
+                <span class="error" ng-show="cardForm.question.$invalid && cardForm.$submitted">Question is not valid.</span>
+                Question: <input name="question" ng-minlength="10" required type="text" ng-model="card.question" /><br />
+                Category:
+                <select required ng-model="card.category">
+                    <option>MongoDB</option>
+                    <option>Express</option>
+                    <option>Angular</option>
+                    <option>Node</option>
+                </select><br />
+                <input required type="text" ng-model="card.answers[0].text" />
+                <input type="checkbox" ng-model="card.answers[0].correct" />
+                <input required type="text" ng-model="card.answers[1].text" />
+                <input type="checkbox" ng-model="card.answers[1].correct" />
+                <input required type="text" ng-model="card.answers[2].text" />
+                <input type="checkbox" ng-model="card.answers[2].correct" />
+                <br /><button>Submit Card</button>
+            </form>
+            
+

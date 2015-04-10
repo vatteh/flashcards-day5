@@ -1,0 +1,9 @@
+<p>FLASH CARDS SHOULD EVENTUALLY LOAD HERE</P>
+
+<flash-card card="flashCard" ng-repeat="flashCard in flashCards | orderBy:'question'" ng-hide="loading || error"></flash-card>
+
+            <div ng-show="error">
+                <h2>FAILED TO GET CARDS… try again perhaps?</h2>
+                <pre>http status code: {{error.status}}</pre>
+            </div>
+

@@ -21,40 +21,23 @@
 
     <body ng-app="FlashCards">
 
-        <a ui-sref='home'>home</a>
+        <div ng-controller="MainController">
+
+
+        <li><a ui-sref='home'>home</a></li>
+        <li><a ui-sref='addcard'>Add Card</a></li>
 
         <div ng-include="'templates/stats.html'">
         </div>
-
-        <div ng-controller="MainController">
-
         <ui-view></ui-view>
             <!--<pre style="text-align: left;">{{ card | json }}</pre>-->
 
-            <form name="cardForm" ng-submit="cardForm.$valid && submitCard(card)" novalidate>
-                <span class="error" ng-show="cardForm.question.$invalid && cardForm.$submitted">Question is not valid.</span>
-                Question: <input name="question" ng-minlength="10" required type="text" ng-model="card.question" /><br />
-                Category:
-                <select required ng-model="card.category">
-                    <option>MongoDB</option>
-                    <option>Express</option>
-                    <option>Angular</option>
-                    <option>Node</option>
-                </select><br />
-                <input required type="text" ng-model="card.answers[0].text" />
-                <input type="checkbox" ng-model="card.answers[0].correct" />
-                <input required type="text" ng-model="card.answers[1].text" />
-                <input type="checkbox" ng-model="card.answers[1].correct" />
-                <input required type="text" ng-model="card.answers[2].text" />
-                <input type="checkbox" ng-model="card.answers[2].correct" />
-                <br /><button>Submit Card</button>
-            </form>
-
-
+           
 
             <button ng-click="getCategoryCards()" ng-class="{ active: chosenCategory === 'All' }">All Categories</button>
 
             <button
+                ui-sref="frog({category: category})"
                     ng-repeat="category in categories"
                     ng-click="getCategoryCards(category)"
                     ng-class="{ active: chosenCategory === category }">
@@ -63,7 +46,10 @@
 
             <loader ng-show="loading"></loader>
 
+            <!-- hide original flashcards
             <flash-card card="flashCard" ng-repeat="flashCard in flashCards | orderBy:'question'" ng-hide="loading || error"></flash-card>
+
+            -->
 
             <div ng-show="error">
                 <h2>FAILED TO GET CARDS… try again perhaps?</h2>
